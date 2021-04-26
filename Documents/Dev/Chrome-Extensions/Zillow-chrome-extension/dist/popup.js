@@ -29884,7 +29884,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Popup = () => {
-    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Popup page"));
+    const [content, setContent] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('N/A');
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+        chrome.tabs.query({ currentWindow: true, active: true }, tabs => {
+            const currentTabID = tabs.length === 0 ? 0 : tabs[0].id;
+            chrome.tabs.sendMessage(currentTabID, '', response => {
+                setContent(response);
+            });
+        });
+    }, []);
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, content));
 };
 (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.render)(react__WEBPACK_IMPORTED_MODULE_0__.createElement(Popup, null), document.getElementById('popup'));
 
