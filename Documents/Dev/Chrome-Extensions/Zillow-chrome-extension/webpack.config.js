@@ -22,6 +22,7 @@ const tsRule = {
   ];
 module.exports = {
     mode:"development",
+    devtool: 'cheap-module-source-map',
     entry:{
         popup:"./src/popup-page/popup.tsx"
     },
